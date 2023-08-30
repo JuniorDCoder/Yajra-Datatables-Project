@@ -1,10 +1,12 @@
 <?php
 
 use App\DataTables\UsersDataTable;
+use App\Helpers\ImageFilter;
 use App\Http\Controllers\ProfileController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
-
+use Intervention\Image\ImageManagerStatic as Image;
+use Intervention\Image\ImageManagerStatic;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,6 +29,12 @@ Route::get('user/{id}/edit', function($id){
 Route::get('/dashboard', function (UsersDataTable $dataTable) {
     return $dataTable->render('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('image', function(){
+    $img = ImageManagerStatic::make('car.jpg');
+    $img->filter(new ImageFilter(5));
+    $img->save('car1.jpg', 100);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
