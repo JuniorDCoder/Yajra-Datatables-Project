@@ -20,6 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('user/{id}/edit', function($id){
+    return $id;
+})->name('user.edit');
+
 Route::get('/dashboard', function (UsersDataTable $dataTable) {
     return $dataTable->render('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
