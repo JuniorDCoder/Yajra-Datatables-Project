@@ -2,6 +2,7 @@
 
 use App\DataTables\UsersDataTable;
 use App\Helpers\ImageFilter;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -41,5 +42,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/shop', [CartController::class, 'shop'])->name('cart.shop');
+Route::get('/cart', [CartController::class, 'cart']);
+Route::get('add-to-cart/{product_id}', [CartController::class, 'addToCart'])->name('add-to-cart');
+
+Route::get('qty-increment/{rowId}', [CartController::class, 'qtyIncrement'])->name('qty-incremet');
+Route::get('qty-decrement/{rowId}', [CartController::class, 'qtyDecrement'])->name('qty-decrement');
+Route::get('remove-product/{rowId}', [CartController::class, 'removeProduct'])->name('remove-product');
 
 require __DIR__.'/auth.php';
