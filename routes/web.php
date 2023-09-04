@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Intervention\Image\ImageManagerStatic as Image;
 use Intervention\Image\ImageManagerStatic;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,5 +52,18 @@ Route::get('add-to-cart/{product_id}', [CartController::class, 'addToCart'])->na
 Route::get('qty-increment/{rowId}', [CartController::class, 'qtyIncrement'])->name('qty-incremet');
 Route::get('qty-decrement/{rowId}', [CartController::class, 'qtyDecrement'])->name('qty-decrement');
 Route::get('remove-product/{rowId}', [CartController::class, 'removeProduct'])->name('remove-product');
+
+Route::get('/create-role', function(){
+    // $permission = Permission::create(['name' => 'edit articles']);
+    // return $permission;
+
+    $user = auth()->user();
+    // $user->assignRole('writer');
+
+    // $user->givePermissionTo('edit articles');
+    // $permissionNames = $user->getPermissionNames();
+    return $user->roles;
+});
+
 
 require __DIR__.'/auth.php';
