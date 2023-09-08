@@ -39,9 +39,12 @@
                 </a>
             @endif
 
-            <x-primary-button class="ml-3">
+            <x-primary-button class="ml-3 me-3">
                 {{ __('Log in') }}
             </x-primary-button>
+            <a href="{{route('github.login')}}" class="btn btn-block btn-social btn-github">
+                <span class="fa fa-twitter"></span> Sign in with Github
+            </a>
         </div>
     </form>
 </x-guest-layout>
