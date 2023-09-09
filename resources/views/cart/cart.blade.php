@@ -59,7 +59,7 @@
                                   </button> --}}
                                 </div>
                                 <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1 mt-2">
-                                  <h6 class="mb-0">{{$product->price}}</h6>
+                                  <h6 class="mb-0">${{$product->price}}</h6>
                                 </div>
                                 <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                                   <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
@@ -71,10 +71,17 @@
                               <hr class="my-4">
                             @endforeach
 
+                            <form action="{{route('paypal.payment')}}" method="POST">
+                                @csrf
+                                <input type="hidden" value="{{$product->price}}" name="price">
+                                <button type="submit" class="btn btn-primary bg-black"
+                                >Buy Now</button>
+                            </form>
+
                           </div>
                         </div>
                         <div class="col-lg-4 bg-grey">
-                          <div class="p-5">
+                          {{-- <div class="p-5">
                             <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
                             <hr class="my-4">
 
@@ -108,10 +115,10 @@
                             <div class="d-flex justify-content-between mb-5">
                               <h5 class="text-uppercase">Total price</h5>
                               <h5>€ 137.00</h5>
-                            </div>
+                            </div> --}}
 
-                            <button type="button" class="btn btn-primary bg-black"
-                            >Register</button>
+                            {{-- <button type="button" class="btn btn-primary bg-black"
+                            >Buy Now</button> --}}
 
                           </div>
                         </div>

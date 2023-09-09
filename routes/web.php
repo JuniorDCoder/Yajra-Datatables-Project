@@ -3,6 +3,7 @@
 use App\DataTables\UsersDataTable;
 use App\Helpers\ImageFilter;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\Gateway\PaypalController;
 use App\Http\Controllers\ProfileController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -86,3 +87,8 @@ Route::get('auth/callback', function(){
 
     return redirect('/dashboard');
 });
+
+
+Route::post('paypal/payment/', [PaypalController::class, 'payment'])->name('paypal.payment');
+Route::get('paypal/sucsess/', [PaypalController::class, 'success'])->name('paypal.success');
+Route::get('paypal/cancel/', [PaypalController::class, 'cancel'])->name('paypal.cancel');
