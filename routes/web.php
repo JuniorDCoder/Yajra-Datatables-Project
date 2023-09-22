@@ -3,6 +3,7 @@
 use App\DataTables\UsersDataTable;
 use App\Helpers\ImageFilter;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\Gateway\FlutterwaveController;
 use App\Http\Controllers\Gateway\PaypalController;
 use App\Http\Controllers\ProfileController;
 use App\Models\User;
@@ -48,7 +49,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/shop', [CartController::class, 'shop'])->name('cart.shop');
-Route::get('/cart', [CartController::class, 'cart']);
+Route::get('/cart', [CartController::class, 'cart'])->name('cart.cart');
 Route::get('add-to-cart/{product_id}', [CartController::class, 'addToCart'])->name('add-to-cart');
 
 Route::get('qty-increment/{rowId}', [CartController::class, 'qtyIncrement'])->name('qty-incremet');
@@ -92,3 +93,6 @@ Route::get('auth/callback', function(){
 Route::post('paypal/payment/', [PaypalController::class, 'payment'])->name('paypal.payment');
 Route::get('paypal/sucsess/', [PaypalController::class, 'success'])->name('paypal.success');
 Route::get('paypal/cancel/', [PaypalController::class, 'cancel'])->name('paypal.cancel');
+
+Route::post('/rave/pay', [FlutterwaveController::class, 'initialize'])->name('flutterwave.pay');
+Route::get('/rave/callback', [FlutterwaveController::class, 'callback'])->name('callback');

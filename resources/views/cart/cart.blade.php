@@ -59,7 +59,7 @@
                                   </button> --}}
                                 </div>
                                 <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1 mt-2">
-                                  <h6 class="mb-0">${{$product->price}}</h6>
+                                  <h6 class="mb-0">XAF{{$product->price}}</h6>
                                 </div>
                                 <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                                   <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
@@ -75,7 +75,13 @@
                                 @csrf
                                 <input type="hidden" value="{{$product->price}}" name="price">
                                 <button type="submit" class="btn btn-primary bg-black"
-                                >Buy Now</button>
+                                >Buy Now With Paypal</button>
+                            </form>
+                            <form action="{{route('flutterwave.pay')}}" method="POST">
+                                @csrf
+                                <input type="hidden" value="{{$product->price}}" name="product_price">
+                                <button type="submit" class="btn btn-primary bg-black mt-2"
+                                >Buy Now With Mobile Money</button>
                             </form>
 
                           </div>
